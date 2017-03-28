@@ -61,9 +61,15 @@ var category_users = require('./app/routes/category_users');
 var user_likes = require('./app/routes/user_likes');
 var matches = require('./app/routes/matches');
 var sessions = require('./app/routes/sessions');
+var user_seen = require('./app/routes/user_seen');
 
 app.use('/', index);
 app.use('/users',users);
+app.use('/sessions',sessions);
+app.use('/categories',categories);
+app.use('/category_users',category_users);
+app.use('/user_likes',user_likes);
+app.use('/user_seen',user_seen);
 app.get('/partials/:name', function (req, res) {
   var name = req.params.name;
   res.render('partials/' + name);

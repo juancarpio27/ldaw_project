@@ -1,4 +1,4 @@
-var db = require('../config/db')
+var db = require('../config/db');
 
 function user(id,name,lastname,email,password,birth,sex,interested){
 	this.id = id;
@@ -20,7 +20,7 @@ exports.createUser = function(callback,name,lastname,email,password,birth,sex,in
 		birth: birth,
 		sex: sex,
 		interested: interested
-	}
+	};
 	db.get().query('insert into users SET ?',values,
 	function (err, result) {
 		if (err){
@@ -30,7 +30,7 @@ exports.createUser = function(callback,name,lastname,email,password,birth,sex,in
 			return callback(null,values);
 		}
 	})
-}
+};
 
 exports.updateUser = function(callback,name,lastname,email,password,birth,sex,interested,id){
 	var values = {
@@ -41,7 +41,7 @@ exports.updateUser = function(callback,name,lastname,email,password,birth,sex,in
 		birth: birth,
 		sex: sex,
 		interested: interested
-	}
+	};
 	db.get().query('update users SET ? where ?',[values,{id: id}],
 	function (err, result) {
 		if (err){
@@ -51,27 +51,46 @@ exports.updateUser = function(callback,name,lastname,email,password,birth,sex,in
 			return callback(null,values);
 		}
 	})
+};
+
+function create_user_hash(result){
+    var user = null;
+    if (result){
+        user = {
+            id: result.id,
+            name: result.name,
+            lastname: result.lastname,
+            email: result.email,
+            birth: result.birth,
+            sex: result.sex,
+            interested: result.interested
+        }
+    }
+    return user;
 }
 
 exports.getUser = function(callback,id){
-	db.get().query('select * from users where id = ?',id, function(err,result){
+	db.get().query('select * from users where id = ? limit 1',id, function(err,result){
 		if (err){
 			return callback(err,null);
 		} else {
-			if (result[0]){
-				var user = {
-					id: result[0].id,
-					name: result[0].name,
-					lastname: result[0].lastname,
-					email: result[0].email,
-					birth: result[0].birth,
-					sex: result[0].sex,
-					interested: result[0].interested
-				}
-			} else {
-				var user = null
-			}
+			var user = create_user_hash(result[0]);
 			return callback(null,user);
 		}
 	})
-}
+};
+
+exports.getUserByEmail = function(callback,email){
+	db.get().query('select * from users where email = ? limit 1',email, function(err,result){
+		if (err){
+			console.log('there was an error');
+			console.log(err);
+			return callback(err,null);
+		} else {
+            var user = create_user_hash(result[0]);
+            if (user)
+            	user.password = result[0].password;
+			return callback(null,user)
+		}
+	})
+};

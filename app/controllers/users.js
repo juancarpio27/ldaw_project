@@ -1,4 +1,4 @@
-var users = require('../modules/user')
+var users = require('../modules/user');
 
 module.exports.create = function(req,res){
 	users.createUser(function(err,result){
@@ -15,7 +15,7 @@ module.exports.create = function(req,res){
     req.body.birth,
     req.body.sex,
     req.body.interested);      
-}
+};
 
 module.exports.update = function(req,res){
 	users.updateUser(function(err,result){
@@ -33,7 +33,7 @@ module.exports.update = function(req,res){
     req.body.sex,
     req.body.interested,
     req.params.id);      
-}
+};
 
 module.exports.show = function(req,res){
     users.getUser(function(err,result){
@@ -43,4 +43,4 @@ module.exports.show = function(req,res){
             res.json({success: true, user: result});  
         }
     },req.params.id)
-}
+};
