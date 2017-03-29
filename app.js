@@ -17,6 +17,17 @@ var handlebars = require('express-handlebars').create({
     layoutsDir: path.join(__dirname,'app', 'views', 'layouts')
 });
 
+
+// var bloom = require('./app/modules/bloom_filter');
+//
+// var b = new bloom.BloomFilter(1000,4);
+// b.add("Divertido");
+// b.add("Simpatico");
+// console.log("Esta divertido??",b.test("Divertido"));
+// console.log("Esta simpatico??",b.test("Simpatico"));
+// console.log(b);
+// console.log("Esta coherente??",b.test("Coherente"));
+
 var app = express();
 //IN CASE OF MYSQL SESSIONS
 app.use(session
@@ -70,6 +81,7 @@ app.use('/categories',categories);
 app.use('/category_users',category_users);
 app.use('/user_likes',user_likes);
 app.use('/user_seen',user_seen);
+app.use('/matches',matches);
 app.get('/partials/:name', function (req, res) {
   var name = req.params.name;
   res.render('partials/' + name);

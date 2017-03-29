@@ -1,4 +1,5 @@
 var db = require('../config/db');
+var bloom = require('./bloom_filter.js');
 
 function user_like(id,user_id,category_id){
 	this.id = id;
@@ -49,6 +50,21 @@ exports.deleteUserLike = function(callback,user_id,category_id){
                 return callback(err,null);
             }else {
                 return callback(null,true);
+            }
+        })
+};
+
+exports.calculateBloomUser = function(callback,user_id){
+    db.get().query('select * from user_likes, categories where user_likes.category_id = categories.id and user_id = ?',user_id,
+        function(err,result){
+            if (err){
+                return callback(err,null)
+            } else {
+                var bloom_filter = new bloom.BloomFilter(1000,4);
+                for (var i =0; i < result.length; ++i){
+                    bloom_filter.add(result[i].name);
+                }
+                return callback(err,bloom_filter);
             }
         })
 };

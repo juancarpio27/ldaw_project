@@ -5,5 +5,6 @@ var controller = require('../controllers/users');
 router.get('/:id',controller.show);
 router.post('/',controller.create);
 router.patch('/:id',controller.update);
+router.get('/:id/interested',controller.interested);
 
 module.exports = router;

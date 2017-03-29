@@ -36,3 +36,16 @@ module.exports.delete = function(req,res){
         req.params.user_id,
         req.body.category_id);
 };
+
+module.exports.calculate_bloom = function(req,res){
+    category_users.calculateBloomUser(function(err,result){
+        if (err){
+            res.json({success: false});
+        } else {
+            console.log('THE FILER OBTAINED');
+            console.log(result);
+            res.json({success: true});
+        }
+    },
+    req.params.user_id, req.body.category_id)
+};
