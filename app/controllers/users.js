@@ -1,12 +1,39 @@
 var users = require('../modules/user');
 var user_likes = require('../modules/user_like');
 var category_users = require('../modules/category_user');
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'gymrein.itesm@gmail.com',
+        pass: 'mayo2017'
+    }
+});
+
 
 module.exports.create = function (req, res) {
     users.createUser(function (err, result) {
             if (err) {
                 res.json({success: false});
             } else {
+                console.log(result);
+
+                var mailOptions = {
+                    from: 'gymrein.itesm@gmail.com', // sender address
+                    to: result.email, // list of receivers
+                    subject: 'Bienvenido a citas', // Subject line
+                    text: 'Hello world ?', // plain text body
+                    html: '<b>Bienvenido al nuevo sistema de citas '+result.name+'!</b>' // html body
+                };
+
+
+                transporter.sendMail(mailOptions, function (error, info){
+                    if (error) {
+                        return console.log(error);
+                    }
+                    console.log('Message %s sent: %s', info.messageId, info.response);
+                });
                 res.json({success: true, user: result});
             }
         },
@@ -46,6 +73,17 @@ module.exports.show = function (req, res) {
         }
     }, req.params.id)
 };
+
+module.exports.destroy = function (req, res) {
+    users.destroyUser(function (err, result) {
+        if (err) {
+            res.json({success: false});
+        } else {
+            res.json({success: true});
+        }
+    }, req.params.id)
+};
+
 
 
 

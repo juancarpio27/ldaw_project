@@ -50,3 +50,13 @@ exports.deleteMatch = function(callback,user_id,user_b_id){
             return callback(null,true);
         })
 };
+
+exports.removeMatch = function(callback,id){
+    db.get().query('delete from matches where id=?',
+        id,function(err,result){
+            if (err){
+                return callback(err,null);
+            }
+            return callback(null,true);
+        })
+};

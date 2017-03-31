@@ -81,6 +81,16 @@ exports.getUser = function (callback, id) {
     })
 };
 
+exports.destroyUser = function (callback, id) {
+    db.get().query('delete from users where id = ?', id, function (err, result) {
+        if (err) {
+            return callback(err, null);
+        } else {
+            return callback(null, true);
+        }
+    })
+};
+
 exports.getUserByEmail = function (callback, email) {
     db.get().query('select * from users where email = ? limit 1', email, function (err, result) {
         if (err) {

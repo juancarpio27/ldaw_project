@@ -74,7 +74,18 @@ var matches = require('./app/routes/matches');
 var sessions = require('./app/routes/sessions');
 var user_seen = require('./app/routes/user_seen');
 
+//ANGULAR ROUTES
+//Always pointing to index because it will only render angular content
 app.use('/', index);
+app.use('/login',index);
+app.use('/register',index);
+app.use('/welcome',index);
+app.use('/search',index);
+app.use('/update',index);
+app.use('/profile',index);
+app.use('/matches',index);
+
+//API ROUES
 app.use('/users',users);
 app.use('/sessions',sessions);
 app.use('/categories',categories);
@@ -102,3 +113,4 @@ app.use(function(err, req, res, next){
 });
 
 module.exports = app;
+

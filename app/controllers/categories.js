@@ -19,3 +19,38 @@ module.exports.index = function(req,res){
         }
     })
 };
+
+module.exports.create = function(req,res){
+
+    categories.createCategory(function(err,result){
+        if (err){
+            res.json({success: false});
+        } else {
+            res.json({success: true, category: result});
+        }
+    },req.body.name)
+
+};
+
+module.exports.update = function(req,res){
+
+    categories.updateCategory(function(err,result){
+        if (err){
+            res.json({success: false});
+        } else {
+            res.json({success: true, category: result});
+        }
+    },req.params.id, req.body.name)
+
+};
+module.exports.destroy = function(req,res){
+
+    categories.deleteCategory(function(err,result){
+        if (err){
+            res.json({success: false});
+        } else {
+            res.json({success: true});
+        }
+    },req.params.id)
+
+};

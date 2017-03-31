@@ -20,3 +20,13 @@ module.exports.destroy = function(req,res){
         }
     },req.params.user_id,req.body.user_b_id);
 };
+
+module.exports.remove = function(req,res){
+    matches.removeMatch(function(err,result){
+        if (err){
+            res.json({success: false});
+        } else {
+            res.json({success: true});
+        }
+    },req.params.id);
+};
