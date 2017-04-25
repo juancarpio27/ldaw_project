@@ -6,10 +6,7 @@ module.exports.create = function(req,res){
             if (err){
                 res.json({success: false});
             }
-            //else {
-            //     res.json({success: true, user_seen: result});
-            // }
-        },
+        l},
         req.body.user_id,
         req.body.user_seen_id,
         req.body.liked);
