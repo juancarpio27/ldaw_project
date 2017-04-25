@@ -121,7 +121,9 @@ app.get('/partials/:name', function (req, res) {
 
 //API ROUES
 
-app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }), function(req,res){
+    res.redirect('/login');
+});
 
 // handle the callback after facebook has authenticated the user
 app.get('/auth/facebook/callback',
