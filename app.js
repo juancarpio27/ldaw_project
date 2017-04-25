@@ -101,16 +101,7 @@ app.use('/update', index);
 app.use('/profile', index);
 app.use('/matches', index);
 
-//API ROUES
 
-app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-
-// handle the callback after facebook has authenticated the user
-app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        successRedirect: '/',
-        failureRedirect: '/'
-    }));
 
 app.use('/users', users);
 app.use('/sessions', sessions);
@@ -123,6 +114,17 @@ app.get('/partials/:name', function (req, res) {
     var name = req.params.name;
     res.render('partials/' + name);
 });
+
+//API ROUES
+
+app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+// handle the callback after facebook has authenticated the user
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/',
+        failureRedirect: '/'
+    }));
 
 app.use(passport.initialize());
 app.use(passport.session());
