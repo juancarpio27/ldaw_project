@@ -41,7 +41,7 @@ app.use(session
 passport.use(new Strategy({
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_SECRET,
-        callbackURL: 'https://rocky-scrubland-84805.herokuapp.com/login/facebook/return'
+        callbackURL: 'https://rocky-scrubland-84805.herokuapp.com/auth/facebook/callback'
     },
     function (accessToken, refreshToken, profile, cb) {
         // In this example, the user's Facebook profile is supplied as the user
