@@ -13,8 +13,10 @@ var transporter = nodemailer.createTransport({
 
 
 module.exports.create = function (req, res) {
+    console.log('I RECEIVE INFO FOR CREATE!!!');
     users.createUser(function (err, result) {
             if (err) {
+                console.log('THERE WAS AN ERROR :(',err);
                 res.json({success: false});
             } else {
                 console.log(result);
