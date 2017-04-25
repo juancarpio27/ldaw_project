@@ -21,6 +21,8 @@ var handlebars = require('express-handlebars').create({
 });
 
 var app = express();
+
+
 //IN CASE OF MYSQL SESSIONS
 app.use(session
     ({
@@ -100,6 +102,16 @@ app.use('/profile', index);
 app.use('/matches', index);
 
 //API ROUES
+
+app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+// handle the callback after facebook has authenticated the user
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/welcome',
+        failureRedirect: '/login'
+    }));
+
 app.use('/users', users);
 app.use('/sessions', sessions);
 app.use('/categories', categories);
@@ -116,14 +128,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 
-// handle the callback after facebook has authenticated the user
-app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        successRedirect: '/welcome',
-        failureRedirect: '/login'
-    }));
+
+
+
+
 
 
 // catch 404 and forward to error handler

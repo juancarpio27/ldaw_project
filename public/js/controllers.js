@@ -26,7 +26,7 @@ angular.module('myApp.controllers', [])
             console.log('LOGIN WITH FACEE!!');
           $http({
               method: 'GET',
-              url: 'auth/facebook'
+              url: '/auth/facebook'
           }).then(function(result){
               console.log('EXITO',result);
           }, function(Error){
