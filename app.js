@@ -115,6 +115,11 @@ app.get('/partials/:name', function (req, res) {
     res.render('partials/' + name);
 });
 
+app.get('/test',function(req,res){
+    console.log('Im GOIN To INDEXX!!');
+    res.render('index');
+});
+
 //API ROUES
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
@@ -122,8 +127,8 @@ app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' })
 // handle the callback after facebook has authenticated the user
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: 'http://google.com',
-        failureRedirect: 'http://google.com'
+        successRedirect: '/test',
+        failureRedirect: '/test'
     }));
 
 app.use(passport.initialize());
