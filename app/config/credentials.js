@@ -1,14 +1,10 @@
 //DATABASE CREDENTIALS
 exports.db = {
-    connectionLimit : 1000,
-    connectTimeout  : 60 * 60 * 1000,
-    aquireTimeout   : 60 * 60 * 1000,
-    timeout         : 60 * 60 * 1000,
-    host: 'mysql-instance1.chzyccekiuas.us-west-2.rds.amazonaws.com',
-    user: 'juancarpio',
-    password: '12345678',
+    host: 'us-cdbr-iron-east-03.cleardb.net',
+    user: 'b8cfe09a39a44a',
+    password: '382d8281',
     port: '3306',
-    database: 'tinder'
+    database: 'heroku_d6e921bc0e2580b'
 };
 
 exports.facebook = {
