@@ -129,8 +129,8 @@ app.get('/login/facebook',function(req,res){
 // handle the callback after facebook has authenticated the user
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/test',
-        failureRedirect: '/test'
+        successRedirect: '/welcome',
+        failureRedirect: '/login'
     }));
 
 
