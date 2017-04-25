@@ -20,6 +20,18 @@ angular.module('myApp.controllers', [])
             }, function errorCallback(response) {
                 console.log('RESPUESTA INCORRECTAAAAA TE QUEDAS FUERA PAPI', response);
             });
+        };
+
+        $scope.loginFacebook = function(){
+            console.log('LOGIN WITH FACEE!!');
+          $http({
+              method: 'GET',
+              url: 'auth/facebook'
+          }).then(function(result){
+              console.log('EXITO',result);
+          }, function(Error){
+              console.log('ERROR!!',Error);
+          })
         }
     })
     .controller('RegisterCtrl', function ($scope, $http) {
