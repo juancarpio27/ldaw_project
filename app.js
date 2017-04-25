@@ -52,6 +52,10 @@ passport.use(new Strategy({
         return cb(null, profile);
     }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 passport.serializeUser(function (user, cb) {
     cb(null, user);
 });
@@ -115,14 +119,12 @@ app.get('/partials/:name', function (req, res) {
     res.render('partials/' + name);
 });
 
-app.get('/test',function(req,res){
+app.get('/login/facebook',function(req,res){
     console.log('Im GOIN To INDEXX!!');
     res.render('index');
 });
 
 //API ROUES
-
-app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 
 // handle the callback after facebook has authenticated the user
 app.get('/auth/facebook/callback',
@@ -130,16 +132,6 @@ app.get('/auth/facebook/callback',
         successRedirect: '/test',
         failureRedirect: '/test'
     }));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-
-
-
-
-
 
 
 // catch 404 and forward to error handler
