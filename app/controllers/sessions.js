@@ -5,10 +5,8 @@ module.exports.create = function (req, res) {
     console.log('CREATING SESSION!!!');
     users.getUserByEmail(function (err, result) {
             if (err) {
-                console.log('THERE WAS AN ERROR!!!',err);
                 res.json({success: false});
             } else {
-                console.log('IT WAS FINE :)');
                 if (result)
                     if (result.password == req.body.password){
                         req.session.name = result.name;
