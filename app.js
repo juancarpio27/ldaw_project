@@ -12,7 +12,10 @@ var Strategy = require('passport-facebook').Strategy;
 
 //IN CASE OF CREDENTIDALS AND DATABASE
 var credentials = require('./app/config/credentials');
-var sessionStore = new MySQLStore(credentials.db);
+
+
+
+var sessionStore = new MySQLStore(credentials.db_development);
 var db = require('./app/config/db');
 
 var handlebars = require('express-handlebars').create({
@@ -44,11 +47,6 @@ passport.use(new Strategy({
         callbackURL: 'https://rocky-scrubland-84805.herokuapp.com/auth/facebook/callback'
     },
     function (accessToken, refreshToken, profile, cb) {
-        // In this example, the user's Facebook profile is supplied as the user
-        // record.  In a production-quality application, the Facebook profile should
-        // be associated with a user record in the application's database, which
-        // allows for account linking and authentication with other identity
-        // providers.
         return cb(null, profile);
     }));
 

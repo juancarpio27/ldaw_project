@@ -49,8 +49,10 @@ module.exports.create = function (req, res) {
 };
 
 module.exports.update = function (req, res) {
+
     users.updateUser(function (err, result) {
             if (err) {
+                console.log('The error is',err);
                 res.json({success: false});
             } else {
                 res.json({success: true, user: result});
@@ -92,19 +94,25 @@ module.exports.destroy = function (req, res) {
 module.exports.interested = function (req, res) {
 
     var interested = [];
+    console.log('CREATED A REQUEST TO DO SOMETHING!!');
 
     user_likes.calculateBloomUser(function (err, bloom) {
         if (err) {
             res.json({success: false});
         }
         users.getUsersInterested(function (err, result) {
+            console.log('i calculated de bloom');
             if (err) {
                 res.json({success: false});
             } else {
                 var interested = [];
+                console.log('I will start the for each');
+                if (result.length == 0)
+                    res.json({success: true, users: interested});
                 result.forEach(function(user,index){
-
+                    console.log('index',index);
                     category_users.getCategoryUsers(function(err,categories){
+                        console.log('Found somethinf :)');
                         var insert = true;
                         for (var j =0; j < categories.length; ++j){
                             insert = insert && bloom.test(categories[j].name);
@@ -113,6 +121,8 @@ module.exports.interested = function (req, res) {
                             console.log('ADDED TO INTERESTED');
                             interested.push(user);
                         }
+                        console.log('Index value',index);
+                        console.log('Result value',result.length - 1);
                         if (index == result.length - 1){
                             console.log('SENDING RESPONSE');
                             res.json({success: true, users: interested});

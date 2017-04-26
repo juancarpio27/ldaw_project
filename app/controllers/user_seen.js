@@ -2,11 +2,12 @@ var user_seen = require('../modules/user_seen');
 var match = require('../modules/match');
 
 module.exports.create = function(req,res){
+
     user_seen.createUserSeen(function(err,result){
             if (err){
                 res.json({success: false});
             }
-        l},
+        },
         req.body.user_id,
         req.body.user_seen_id,
         req.body.liked);
@@ -28,7 +29,7 @@ module.exports.create = function(req,res){
                     res.json({success:true, result: result, match: false});
             }
             else
-                res.json({seccess: true, result: result});
+                res.json({seccess: true, result: result, match: false});
         }
     },req.body.user_id,req.body.user_seen_id);
 };

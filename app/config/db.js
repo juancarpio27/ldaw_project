@@ -7,7 +7,7 @@ var state = {
 };
 
 exports.connect = function(done) {
-    state.pool = mysql.createPool(credentials.db);
+    state.pool = mysql.createPool(credentials.db_development);
     done();
 };
 

@@ -43,6 +43,7 @@ exports.updateUser = function (callback, name, lastname, email, password, birth,
         sex: sex,
         interested: interested
     };
+    console.log('Im the query, my values are',values);
     db.get().query('update users SET ? where ?', [values, {id: id}],
         function (err, result) {
             if (err) {

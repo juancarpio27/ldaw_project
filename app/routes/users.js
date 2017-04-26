@@ -4,7 +4,7 @@ var controller = require('../controllers/users');
 
 router.get('/:id',controller.show);
 router.post('/',controller.create);
-router.patch('/:id',controller.update);
+router.post('/:id',controller.update);
 router.get('/:id/interested',controller.interested);
 router.delete('/:id',controller.destroy);
 

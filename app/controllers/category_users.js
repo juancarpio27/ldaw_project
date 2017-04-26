@@ -26,6 +26,8 @@ module.exports.get_category_users = function(req,res){
 
 
 module.exports.delete = function(req,res){
+    console.log('USER ID',req.params.user_id);
+    console.log('CTEGORY ID',req.body.category_id);
     category_users.deleteCategoryUser(function(err,result){
             if (err){
                 res.json({success: false});

@@ -1,5 +1,107 @@
-<h1>Bienvenido al sitio</h1>
+<div ng-include="'shared/navbar.html'"></div>
 
-<a href="/profile">Ver perfil</a>
-<a href="/matches">Matches</a>
-<a href="/search">Buscar citas</a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+
+            <!--View profile -->
+            <div ng-show="!editingProfile">
+                <div class="thumbnail">
+                    <img src="http://www.technodoze.com/wp-content/uploads/2016/03/default-placeholder.png" alt="..." height="300">
+                    <div class="caption">
+                        <h3>\{{user.name}} \{{user.lastname}}</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+                        <p><a class="btn btn-primary btn-block" role="button" ng-click="edit()">Edit</a></p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Edit profile -->
+            <div ng-show="editingProfile">
+                <div class="thumbnail">
+                    <div class="caption">
+
+                        <form name="form" ng-submit="update()">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" ng-model="user.name" required class="form-control" placeholder="Name"/></label>
+                            </div>
+                            <div class="form-group">
+                                <label>Lastname</label>
+                                <input type="text" ng-model="user.lastname" required class="form-control" placeholder="Lastname"/></label>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Birth date</label>
+                                <input type="text" ng-model="user.birth" required class="form-control" placeholder="Birth date"/></label>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sex</label>
+                                <select ng-model="user.sex" required class="form-control" placeholder="Sex">
+                                    <option value="0">Female</option>
+                                    <option value="1">Male</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Interested</label>
+                                <select ng-model="user.interested" required class="form-control" placeholder="Interested">
+                                    <option value="0">Female</option>
+                                    <option value="1">Male</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Save</button><br>
+                        </form>
+
+                        <p><a class="btn btn-block btn-danger" role="button" ng-click="edit()">Cancel</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="well">
+                <h3>How do you define yourself! <button class="btn btn-warning" ng-click="editCategories()">Edit</button></h3>
+                <div ng-repeat="category in categories" ng-show="!editingCategories">
+                    <div class="alert alert-success">
+                        \{{category.name}}
+                    </div>
+                </div>
+
+                <div ng-show="editingCategories">
+                    <div ng-repeat="category in categories">
+                        <button class="btn btn-danger" ng-click="removeCategory(category)">
+                            \{{category.name}} <i class="fa fa-remove"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="well">
+
+                <h3>What are you looking for? <button class="btn btn-warning" ng-click="editLikes()">Edit</button></h3>
+                <div ng-repeat="category in likes.user_likes" ng-show="!editingLikes">
+                    <div class="alert alert-success">
+                        \{{category.name}}
+                    </div>
+                </div>
+
+                <div ng-show="editingLikes">
+                    <div ng-repeat="category in likes.user_likes">
+                        <button class="btn btn-danger" ng-click="removeLike(category)">
+                            \{{category.name}} <i class="fa fa-remove"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<a href="/profile">Ver perfil</a>-->
+<!--<a href="/matches">Matches</a>-->
+<!--<a href="/search">Buscar citas</a>-->

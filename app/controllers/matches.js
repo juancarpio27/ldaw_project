@@ -12,13 +12,14 @@ module.exports.get_matches = function(req,res){
 };
 
 module.exports.destroy = function(req,res){
+    console.log('id to deleteeee',req.params.id);
     matches.deleteMatch(function(err,result){
         if (err){
             res.json({success: false});
         } else {
             res.json({success: true});
         }
-    },req.params.user_id,req.body.user_b_id);
+    },req.params.id);
 };
 
 module.exports.remove = function(req,res){

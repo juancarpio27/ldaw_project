@@ -1,1 +1,23 @@
-<h2>Matches</h2>
+<div ng-include="'shared/navbar.html'"></div>
+
+<div class="container">
+    <div ng-repeat="match in matches">
+        <div class="well">
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object" src="http://www.technodoze.com/wp-content/uploads/2016/03/default-placeholder.png" width="100">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">\{{match.name}} \{{match.lastname}}</h4>
+                </div>
+                <div class="media-right">
+                    <button class="btn btn-danger" ng-click="removeMatch(match)"><i class="fa fa-remove"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

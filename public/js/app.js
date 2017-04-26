@@ -1,13 +1,4 @@
-// Declare app level module which depends on filters, and services
-angular.module('myApp', [
-  'myApp.controllers',
-  'myApp.filters',
-  'myApp.services',
-  'myApp.directives'
-]).
-config();
-
-angular.module('myApp', ['myApp.controllers', 'myApp.filters', 'myApp.services', 'myApp.directives']).
+angular.module('myApp', ['myApp.controllers','sessions.controllers','sessions.services','users.controllers','users.services','categories.services']).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.
     when('/', {
@@ -24,11 +15,24 @@ angular.module('myApp', ['myApp.controllers', 'myApp.filters', 'myApp.services',
     }).
     when('/welcome', {
         templateUrl: 'partials/welcome',
-        controller: 'WelcomeCtrl'
+        controller: 'WelcomeCtrl',
+        resolve: {
+            categoriesData: function(userCategoryService){
+                return userCategoryService.get();
+            },
+            likesData: function(userLikesService){
+                return userLikesService.get();
+            }
+        }
     }).
     when('/search', {
         templateUrl: 'partials/search',
-        controller: 'SearchCtrl'
+        controller: 'SearchCtrl',
+        resolve: {
+            interestedData: function(userService){
+                return userService.interested( {timeout: 5000});
+            }
+        }
     }).
     when('/update', {
         templateUrl: 'partials/update',
@@ -40,7 +44,12 @@ angular.module('myApp', ['myApp.controllers', 'myApp.filters', 'myApp.services',
     }).
     when('/matches', {
         templateUrl: 'partials/matches',
-        controller: 'MatchesCtrl'
+        controller: 'MatchesCtrl',
+        resolve: {
+            matchesData: function(userService){
+                return userService.getMatches({timeout: 5000});
+            }
+        }
     }).
     otherwise({
         redirectTo: '/'

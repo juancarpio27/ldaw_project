@@ -1,1 +1,35 @@
-<h2>Buscar citas</h2>
+<div ng-include="'shared/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div ng-show="index != interested.length">
+                <button class="btn btn-danger btn-block" ng-click="responseToUser(0)" style="margin-top: 200px;">Don't like</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+
+            <div ng-show="index == interested.length">
+                <div class="well">
+                    <img src="https://www.hireer.com/images/noresult.png" height="250"><br><br>
+                    <button ng-click="searchMore()" class="btn btn-success btn-block">Search more</button>
+                </div>
+            </div>
+            <div ng-show="index != interested.length">
+                <div class="thumbnail">
+                    <img src="http://www.technodoze.com/wp-content/uploads/2016/03/default-placeholder.png" alt="..." height="175">
+                    <div class="caption">
+                        <h3>\{{interested[index].name}} \{{interested[index].lastname}}</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div ng-show="index != interested.length">
+                <button class="btn btn-success btn-block" ng-click="responseToUser(1)" style="margin-top: 200px;">Like</button>
+            </div>
+        </div>
+    </div>
+</div>
